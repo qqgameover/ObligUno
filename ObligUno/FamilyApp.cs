@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,7 +25,7 @@ namespace ObligUno
             CommandPrompt =
                 "hjelp => viser en hjelpetekst som forklarer alle kommandoene\r\n" +
                 "liste => lister alle personer med id, fornavn, fødselsår, dødsår og navn og id på mor og far om det finnes registrert. \r\nvis " +
-                "<id> => viser en bestemt person med mor, far og barn (og id for disse, slik at man lett kan vise en av dem) f. eks <13> eller vis 3";
+                "<id> => viser en bestemt person med mor, far og barn (og id for disse, slik at man lett kan vise en av dem) vis 3 \r\n";
         }
 
         public string HandleCommand(string command)
@@ -45,27 +46,38 @@ namespace ObligUno
                 response = CommandPrompt;
                 return response;
             }
-            if (command.Contains("<") && command.Contains(">"))
+            if (command.Contains("vis"))
             {
-                var id = command.Trim('<', '>');
-                foreach (var person in People.Where(person => person.Id == Convert.ToInt32(id)))
+                var idSplit = command.Split(" ");
+                var id = idSplit[1];
+                foreach (var person in People)
                 {
-                    return person.GetDescription();
+                    if (person.Id == Convert.ToInt32(id))
+                    {
+                        var text = person.GetDescription();
+                        if (FindChildren(person) != "\n  Barn:\n")
+                        {
+                            text += FindChildren(person);
+                        }
+                        return text;
+                    }
                 }
             }
-
             return response;
         }
 
         public static string FindChildren(Person p)
         {
             var children = "\n  Barn:\n";
-            foreach (var person in People.Where(person => person.Father != null && person.Mother != null).Where(person => p.Id == person.Father.Id || p.Id == person.Mother.Id))
+            foreach (var person in People)
             {
-                if (person.FirstName != null) children += $"    {person.FirstName}";
-                if (person.Id != 0) children += $"(Id={person.Id})";
-                if (person.BirthYear != 0) children += $"Født: {person.BirthYear}";
-                children += "\n";
+                if ((person.Father != null && p.Id == person.Father.Id) || (person.Mother != null && p.Id == person.Mother.Id))
+                {
+                    if (person.FirstName != null) children += $"    {person.FirstName}";
+                    if (person.Id != 0) children += $" (Id={person.Id}) ";
+                    if (person.BirthYear != 0) children += $"Født: {person.BirthYear}";
+                    children += "\n";
+                }
             }
 
             return children;

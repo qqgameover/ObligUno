@@ -29,8 +29,6 @@ namespace ObligUno
                 LastName is not null && DeathYear != 0)
             {
                 var x = $"{FirstName} {LastName} (Id={Id}) Født: {BirthYear} Død: {DeathYear} Far: {Father.FirstName} (Id={Father.Id}) Mor: {Mother.FirstName} (Id={Mother.Id})";
-                var kids = FamilyApp.FindChildren(this);
-                if (kids != "\n  Barn:\n") return x + kids;
                 return x;
             }
 
@@ -44,7 +42,6 @@ namespace ObligUno
             if (Father != null && Father.Id != 0) text += $"(Id={Father.Id})";
             if (Mother is {FirstName: { }}) text += $"Mor: {Mother.FirstName}";
             if (Mother != null && Mother.Id != 0) text += $"(Id={Mother.Id})";
-            if (FamilyApp.FindChildren(this) != "\n  Barn:\n") text += FamilyApp.FindChildren(this);
             return text;
         }
     }
