@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31313.79
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObligUno", "ObligUno\ObligUno.csproj", "{77266032-CF68-41F5-BE4E-623218D21FBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ObligUno", "ObligUno\ObligUno.csproj", "{77266032-CF68-41F5-BE4E-623218D21FBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObligUnoTest", "ObligUnoTest\ObligUnoTest.csproj", "{7C2A56B7-3E2F-4726-8443-0E6C160F60C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ObligUnoTest", "ObligUnoTest\ObligUnoTest.csproj", "{7C2A56B7-3E2F-4726-8443-0E6C160F60C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyTest", "FamilyTest\FamilyTest.csproj", "{6F49EB6E-A6CF-47CA-976F-4292DDEA7AF6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{77266032-CF68-41F5-BE4E-623218D21FBD} = {77266032-CF68-41F5-BE4E-623218D21FBD}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +26,10 @@ Global
 		{7C2A56B7-3E2F-4726-8443-0E6C160F60C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C2A56B7-3E2F-4726-8443-0E6C160F60C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C2A56B7-3E2F-4726-8443-0E6C160F60C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F49EB6E-A6CF-47CA-976F-4292DDEA7AF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F49EB6E-A6CF-47CA-976F-4292DDEA7AF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F49EB6E-A6CF-47CA-976F-4292DDEA7AF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F49EB6E-A6CF-47CA-976F-4292DDEA7AF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

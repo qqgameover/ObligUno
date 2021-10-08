@@ -28,10 +28,10 @@ namespace ObligUno
             Console.WriteLine(app.WelcomeMessage);
             while (true)
             {
-                //Console.Write(app.CommandPrompt);
-                //var command = Console.ReadLine();
-                //var response = app.HandleCommand(command);
-                //Console.WriteLine(response);
+                Console.Write(app.CommandPrompt);
+                var command = Console.ReadLine();
+                var response = app.HandleCommand(command);
+                Console.WriteLine(response);
             }
         }
         
