@@ -8,6 +8,7 @@ namespace ObligUno
         {
             var sverreMagnus = new Person {Id = 1, FirstName = "Sverre Magnus", BirthYear = 2005};
             var ingridAlexandra = new Person {Id = 2, FirstName = "Ingrid Alexandra", BirthYear = 2004};
+            var kaspesLøvold = new Person {Id = 9, FirstName = "Kasper", LastName = "Løvold", BirthYear = 1999};
             var haakon = new Person {Id = 3, FirstName = "Haakon Magnus", BirthYear = 1973};
             var metteMarit = new Person {Id = 4, FirstName = "Mette-Marit", BirthYear = 1973};
             var marius = new Person {Id = 5, FirstName = "Marius", LastName = "Borg Høiby", BirthYear = 1997};
@@ -24,7 +25,7 @@ namespace ObligUno
             haakon.Mother = sonja;
             harald.Father = olav;
 
-            var app = new FamilyApp(sverreMagnus, ingridAlexandra, haakon, metteMarit, marius, harald, sonja, olav);
+            var app = new FamilyApp(sverreMagnus, ingridAlexandra, haakon, metteMarit, marius, harald, sonja, olav, kaspesLøvold);
             Console.WriteLine(app.WelcomeMessage);
             Console.Write(app.CommandPrompt);
             while (true)
