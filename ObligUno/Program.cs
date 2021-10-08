@@ -26,9 +26,9 @@ namespace ObligUno
 
             var app = new FamilyApp(sverreMagnus, ingridAlexandra, haakon, metteMarit, marius, harald, sonja, olav);
             Console.WriteLine(app.WelcomeMessage);
+            Console.Write(app.CommandPrompt);
             while (true)
             {
-                Console.Write(app.CommandPrompt);
                 var command = Console.ReadLine();
                 var response = app.HandleCommand(command);
                 Console.WriteLine(response);
