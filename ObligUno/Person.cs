@@ -58,23 +58,6 @@ namespace ObligUno
             return str;
         }
 
-        private string GetFullDesc()
-        {
-            return
-                $"{GetFullName()}(Id={Id}) Født: {BirthYear} Død: {DeathYear} " +
-                $"Far: {Father.FirstName} (Id={Father.Id}) Mor: {Mother.FirstName} (Id={Mother.Id})";
-        }
-
-        private string GetId()
-        {
-            return $"(Id={Id})";
-        }
-
-        private string GetFullName(string preVal = "", string postVal = " ")
-        {
-            return $"{preVal}{GetFirstName()} {GetLastName()}{postVal}";
-        }
-
         private string GetFirstName()
         {
             return FirstName;
