@@ -43,13 +43,6 @@ namespace ObligUno
             return text.Trim();
         }
 
-        private string GetBothParents()
-        {
-            var text = GetFatherDesc();
-            text += GetMotherDesc();
-            return text;
-        }
-
         private string GetMotherDesc()
         {
             var str = "";
