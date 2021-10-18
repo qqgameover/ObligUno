@@ -30,9 +30,9 @@ namespace ObligUno
 
         public string HandleCommand(string command)
         {
-            var response = "";
             if (command == "liste")
             {
+                var response = "";
                 foreach (var person in People)
                 {
                     response += person.GetDescription();
@@ -43,44 +43,52 @@ namespace ObligUno
             }
             if (command == "hjelp")
             {
-                response = CommandPrompt;
-                return response;
+                return CommandPrompt;
             }
-            if (command.Contains("vis"))
+
+            if (!command.Contains("vis")) return CommandPrompt;
+            var idSplit = command.Split(" ");
+            var id = idSplit[1];
+
+            var thePerson = FindPerson(id);
+
+            if (thePerson == null) return "";
+
+            var text = thePerson.GetDescription();
+            if (FindChildren(thePerson).Length != 0)
             {
-                var idSplit = command.Split(" ");
-                var id = idSplit[1];
-                foreach (var person in People)
-                {
-                    if (person.Id == Convert.ToInt32(id))
-                    {
-                        var text = person.GetDescription();
-                        if (FindChildren(person) != "\n  Barn:\n")
-                        {
-                            text += FindChildren(person);
-                        }
-                        return text;
-                    }
-                }
+                text += "\n  Barn:\n";
+                text = FindChildren(thePerson).Aggregate(text, (current, child) => current + $"    {child.FirstName} (Id={child.Id}) Født: {child.BirthYear}\n");
             }
-            return response;
+            return text;
         }
 
-        public static string FindChildren(Person p)
+        private static Person FindPerson(string id)
         {
-            var children = "\n  Barn:\n";
+            Person thePerson = null;
             foreach (var person in People)
             {
-                if ((person.Father != null && p.Id == person.Father.Id) || (person.Mother != null && p.Id == person.Mother.Id))
+                if (person.Id == Convert.ToInt32(id))
                 {
-                    if (person.FirstName != null) children += $"    {person.FirstName}";
-                    if (person.Id != 0) children += $" (Id={person.Id}) ";
-                    if (person.BirthYear != 0) children += $"Født: {person.BirthYear}";
-                    children += "\n";
+                    thePerson = person;
                 }
             }
 
-            return children;
+            return thePerson;
+        }
+
+
+        public static Person[] FindChildren(Person p)
+        {
+            var children = new List<Person>();
+            foreach (var person in People)
+            {
+                if (p.Id == person.Father?.Id || p.Id == person.Mother?.Id)
+                {
+                    children.Add(person);
+                }
+            }
+            return children.ToArray();
         }
     }
 }
