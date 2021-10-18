@@ -27,14 +27,14 @@ namespace ObligUno
             if (DeathYear != null) text += $" Død: {DeathYear}";
             if (Father != null && Mother != null)
             {
-                text += GetFatherDesc().PadLeft(1, Convert.ToChar(" "));
+                text += GetFatherDesc();
                 text += " ";
                 text += GetMotherDesc();
                 return text.Trim();
             }
             if (Father != null)
             {
-                text += GetFatherDesc().PadLeft(1);
+                text += GetFatherDesc();
             }
             if (Mother != null)
             {
