@@ -16,38 +16,80 @@ namespace ObligUno
         public string LastName { get; set; }
         public int? DeathYear { get; set; }
 
-        public Person()
-        {
-            
-        }
 
         public string GetDescription()
         {
-            if (FirstName == null && BirthYear == null && Father == null && Mother == null && LastName == null &&
-                DeathYear == null) return $"(Id={Id})";
-            if (FirstName is not null && BirthYear != 0 && Father is not null && Mother is not null &&
-                LastName is not null && DeathYear != 0)
-            {
-                var x = $"{FirstName} {LastName} (Id={Id}) Født: {BirthYear} Død: {DeathYear} Far: {Father.FirstName} (Id={Father.Id}) Mor: {Mother.FirstName} (Id={Mother.Id})";
-                return x;
-            }
-
             var text = "";
-            if (FirstName != null) text += $"{FirstName} ";
-            if (LastName != null) text += $"{LastName}";
-            if (Id != null) text += $"(Id={Id}) ";
-            if (BirthYear != null) text += $"Født: {BirthYear} ";
-            if (DeathYear != null) text += $"Død: {DeathYear}";
+            if (FirstName != null) text += $"{GetFirstName()} ";
+            if (LastName != null) text += $"{GetLastName()}";
+            if (Id != null) text += $"(Id={Id})";
+            if (BirthYear != null) text += $" Født: {BirthYear}";
+            if (DeathYear != null) text += $" Død: {DeathYear}";
+            if (Father != null && Mother != null)
+            {
+                text += GetFatherDesc().PadLeft(1, Convert.ToChar(" "));
+                text += " ";
+                text += GetMotherDesc();
+                return text.Trim();
+            }
             if (Father != null)
             {
-                text += $"Far: {Father?.FirstName}";
-                text += $"(Id={Father?.Id})";
+                text += GetFatherDesc().PadLeft(1);
             }
             if (Mother != null)
             {
-                text += $"Mor: {Mother?.FirstName}";
-                text += $"(Id={Mother?.Id})";
+                text += GetMotherDesc();
             }
+            return text.Trim();
+        }
+
+        private string GetBothParents()
+        {
+            var text = GetFatherDesc();
+            text += GetMotherDesc();
+            return text;
+        }
+
+        private string GetMotherDesc()
+        {
+            var str = "";
+            str += $"Mor: {Mother?.FirstName}";
+            str += $"(Id={Mother?.Id})";
+            return str;
+        }
+
+        private string GetFullDesc()
+        {
+            return
+                $"{GetFullName()}(Id={Id}) Født: {BirthYear} Død: {DeathYear} " +
+                $"Far: {Father.FirstName} (Id={Father.Id}) Mor: {Mother.FirstName} (Id={Mother.Id})";
+        }
+
+        private string GetId()
+        {
+            return $"(Id={Id})";
+        }
+
+        private string GetFullName(string preVal = "", string postVal = " ")
+        {
+            return $"{preVal}{GetFirstName()} {GetLastName()}{postVal}";
+        }
+
+        private string GetFirstName()
+        {
+            return FirstName;
+        }
+
+        private string GetLastName()
+        {
+            return LastName + " ";
+        }
+
+        private string GetFatherDesc()
+        {
+            var text = "";
+            text += $" Far: {Father?.FirstName}";
+            text += $"(Id={Father?.Id})";
             return text;
         }
     }
