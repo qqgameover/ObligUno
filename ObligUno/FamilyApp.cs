@@ -71,7 +71,6 @@ namespace ObligUno
                     thePerson = person;
                 }
             }
-
             return thePerson;
         }
 
