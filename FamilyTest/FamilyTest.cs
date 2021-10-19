@@ -19,7 +19,7 @@ namespace FamilyTest
 
             var app = new FamilyApp(sverreMagnus, ingridAlexandra, haakon);
             var actualResponse = app.HandleCommand("vis 3");
-            var expectedResponse = "Haakon Magnus (Id=3) Født: 1973 Far: Harald(Id=6)\n"
+            var expectedResponse = "Haakon Magnus (Id=3) Født: 1973 Far: Harald (Id=6)\n"
                                    + "  Barn:\n"
                                    + "    Sverre Magnus (Id=1) Født: 2005\n"
                                    + "    Ingrid Alexandra (Id=2) Født: 2004\n";
@@ -37,7 +37,7 @@ namespace FamilyTest
 
             var app = new FamilyApp(sverreMagnus, ingridAlexandra, haakon);
             var actualResponse = app.HandleCommand("vis 3");
-            var expectedResponse = "Haakon Magnus (Id=3) Født: 1973 Far: Harald(Id=6)";
+            var expectedResponse = "Haakon Magnus (Id=3) Født: 1973 Far: Harald (Id=6)";
             Assert.AreEqual(expectedResponse, actualResponse);
         }
     }

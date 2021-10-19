@@ -21,7 +21,7 @@ namespace ObligUnoTest
             };
 
             var actualDescription = p.GetDescription();
-            var expectedDescription = "Ola Nordmann (Id=17) Født: 2000 Død: 3000 Far: Per(Id=23) Mor: Lise(Id=29)";
+            var expectedDescription = "Ola Nordmann (Id=17) Født: 2000 Død: 3000 Far: Per (Id=23) Mor: Lise (Id=29)";
 
             Assert.AreEqual(expectedDescription, actualDescription);
         }

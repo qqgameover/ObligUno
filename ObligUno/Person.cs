@@ -17,56 +17,53 @@ namespace ObligUno
         public int? DeathYear { get; set; }
 
 
-        public string GetDescription()
+        //public string GetDescription()
+        //{
+        //    var text = "";
+        //    if (FirstName != null) text += $"{GetFirstName()} ";
+        //    if (LastName != null) text += $"{GetLastName()}";
+        //    if (Id != null) text += $"(Id={Id})";
+        //    if (BirthYear != null) text += $" Født: {BirthYear}";
+        //    if (DeathYear != null) text += $" Død: {DeathYear}";
+        //    if (Father != null && Mother != null)
+        //    {
+        //        text += GetFatherDesc();
+        //        text += " ";
+        //        text += GetMotherDesc();
+        //        return text.Trim();
+        //    }
+        //    if (Father != null)
+        //    {
+        //        text += GetFatherDesc();
+        //    }
+        //    if (Mother != null)
+        //    {
+        //        text += GetMotherDesc();
+        //    }
+        //    return text.Trim();
+        //}
+        public string GetDescription(bool asMother = false, bool asFather = false ,bool asChild = false)
         {
-            var text = "";
-            if (FirstName != null) text += $"{GetFirstName()} ";
-            if (LastName != null) text += $"{GetLastName()}";
-            if (Id != null) text += $"(Id={Id})";
-            if (BirthYear != null) text += $" Født: {BirthYear}";
-            if (DeathYear != null) text += $" Død: {DeathYear}";
-            if (Father != null && Mother != null)
-            {
-                text += GetFatherDesc();
-                text += " ";
-                text += GetMotherDesc();
-                return text.Trim();
-            }
-            if (Father != null)
-            {
-                text += GetFatherDesc();
-            }
-            if (Mother != null)
-            {
-                text += GetMotherDesc();
-            }
+            var firstNameStr = FormatField(FirstName, asChild ? "    " : "");
+            var idStr = FormatField(Id, "(Id=", ") ");
+            var birthYearStr = FormatField(BirthYear, "Født: ");
+            if (asFather) return "Far: " + firstNameStr + idStr.Trim();
+            if (asMother) return "Mor: " + firstNameStr + idStr;
+            if (asChild) return firstNameStr + idStr + birthYearStr;
+            var text = firstNameStr
+                       + FormatField(LastName)
+                       + idStr
+                       + FormatField(BirthYear, "Født: ")
+                       + FormatField(DeathYear, "Død: ")
+                       + FormatField(Father?.GetDescription(false, true))
+                       + FormatField(Mother?.GetDescription(true));
             return text.Trim();
         }
 
-        private string GetMotherDesc()
+        private static string FormatField(object value, string preLabel = "", string postLabel = " ")
         {
-            var str = "";
-            str += $"Mor: {Mother?.FirstName}";
-            str += $"(Id={Mother?.Id})";
-            return str;
-        }
-
-        private string GetFirstName()
-        {
-            return FirstName;
-        }
-
-        private string GetLastName()
-        {
-            return LastName + " ";
-        }
-
-        private string GetFatherDesc()
-        {
-            var text = "";
-            text += $" Far: {Father?.FirstName}";
-            text += $"(Id={Father?.Id})";
-            return text;
+            if (value == null) return "";
+            return preLabel + value + postLabel;
         }
     }
 }
