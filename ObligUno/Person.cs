@@ -15,33 +15,6 @@ namespace ObligUno
         public Person Mother { get; set; }
         public string LastName { get; set; }
         public int? DeathYear { get; set; }
-
-
-        //public string GetDescription()
-        //{
-        //    var text = "";
-        //    if (FirstName != null) text += $"{GetFirstName()} ";
-        //    if (LastName != null) text += $"{GetLastName()}";
-        //    if (Id != null) text += $"(Id={Id})";
-        //    if (BirthYear != null) text += $" Født: {BirthYear}";
-        //    if (DeathYear != null) text += $" Død: {DeathYear}";
-        //    if (Father != null && Mother != null)
-        //    {
-        //        text += GetFatherDesc();
-        //        text += " ";
-        //        text += GetMotherDesc();
-        //        return text.Trim();
-        //    }
-        //    if (Father != null)
-        //    {
-        //        text += GetFatherDesc();
-        //    }
-        //    if (Mother != null)
-        //    {
-        //        text += GetMotherDesc();
-        //    }
-        //    return text.Trim();
-        //}
         public string GetDescription(bool asMother = false, bool asFather = false ,bool asChild = false)
         {
             var firstNameStr = FormatField(FirstName, asChild ? "    " : "");
