@@ -65,30 +65,12 @@ namespace ObligUno
 
         private static Person FindPerson(string id)
         {
-            Person thePerson = null;
-            //foreach (var person in People)
-            //{
-            //    if (person.Id == Convert.ToInt32(id))
-            //    {
-            //        thePerson = person;
-            //    }
-            //}
-            thePerson = People.FirstOrDefault(i => i.Id == Convert.ToInt32(id));
-            return thePerson;
+            return People.FirstOrDefault(i => i.Id == Convert.ToInt32(id));
         }
 
 
         public static Person[] FindChildren(Person p)
         {
-            //var children = new List<Person>();
-            //foreach (var person in People)
-            //{
-            //    if (p.Id == person.Father?.Id || p.Id == person.Mother?.Id)
-            //    {
-            //        children.Add(person);
-            //    }
-            //}
-
             var kids = from person in People
                 where person.Father?.Id == p.Id || person.Mother?.Id == p.Id
                 select person;
