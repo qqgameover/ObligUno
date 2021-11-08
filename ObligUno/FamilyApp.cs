@@ -59,7 +59,10 @@ namespace ObligUno
             var text = thePerson.GetDescription();
             if (FindChildren(thePerson).Length == 0) return text;
             text += "\n  Barn:\n";
-            text = FindChildren(thePerson).Aggregate(text, (current, child) => current + $"    {child.FirstName} (Id={child.Id}) Født: {child.BirthYear}\n");
+            text = FindChildren(thePerson)
+                .Aggregate(text,
+                    (current,
+                        child) => current + $"    {child.FirstName} (Id={child.Id}) Født: {child.BirthYear}\n");
             return text;
         }
 
